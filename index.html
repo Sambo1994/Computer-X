@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReactOS Emulator</title>
+    <script src="https://copy.sh/v86/build/v86.js"></script>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        #emulator { width: 800px; height: 600px; margin: auto; border: 1px solid #000; }
+    </style>
+</head>
+<body>
+    <h1>Run ReactOS in Your Browser</h1>
+    <button onclick="startEmulator()">Start ReactOS</button>
+    <div id="emulator"></div>
+    
+    <script>
+        function startEmulator() {
+            let emulator = new V86({
+                wasm_path: "https://copy.sh/v86/build/v86.wasm",
+                memory_size: 256 * 1024 * 1024,
+                vga_memory_size: 8 * 1024 * 1024,
+                screen_container: document.getElementById("emulator"),
+                bios: { url: "https://copy.sh/v86/bios/seabios.bin" },
+                vga_bios: { url: "https://copy.sh/v86/bios/vgabios.bin" },
+                cdrom: { url: "reactos.iso" },
+            });
+        }
+    </script>
+</body>
+</html>
